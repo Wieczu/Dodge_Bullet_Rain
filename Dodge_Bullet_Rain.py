@@ -64,12 +64,13 @@ def player_name_func():
                 pygame.quit()
                 sys.exit()
             if pn_event.type == pygame.KEYDOWN:
-                if pn_event.key != pygame.K_SPACE:
+                if pn_event.key != pygame.K_SPACE and pn_event.key != pygame.K_BACKSPACE:
                     name += pn_event.unicode
                 if pn_event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
-                    
+                if pn_event.key == pygame.K_BACKSPACE:
+                    name = name[:-1]
                 if pn_event.key == pygame.K_RETURN:
                     name_loop = False
                     name = str(name)
