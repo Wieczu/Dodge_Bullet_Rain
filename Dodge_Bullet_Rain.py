@@ -330,7 +330,7 @@ def main():
     main_music.play(loops=-1)
 
     while run:
-        screen.fill((50, 0, 0))
+        screen.fill((55, 0, 0))
         user_text = "score: " + str(score)
         text_surface = base_font.render(user_text, True, (172, 120, 18))
         screen.blit(text_surface, (5, 15))
@@ -488,6 +488,8 @@ def main():
                         score += 50
                     else:
                         score += 500
+                    heart_x = random.randint(1, 680)
+                    heart_y = window_y - 20
                     heart_score = 3
             pygame.display.update()
 
@@ -507,6 +509,8 @@ def main():
                     else:
                         score += 1000
                     heart_score = 4
+                    heart_x = random.randint(1, 680)
+                    heart_y = window_y - 20
             pygame.display.update()
 
         if heart_score == 4:
