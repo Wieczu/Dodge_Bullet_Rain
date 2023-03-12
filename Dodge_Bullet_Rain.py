@@ -308,6 +308,7 @@ def main():
     vertical_bullet_x = random.choice([0, 700])
     vertical_bullet_y = random.randint(630, 690)
     vertical_bullet_game_speed = 2
+    vertical_bullet_x1 = 350
 
     # Player Attributes
     start_x = window_x / 2
@@ -358,8 +359,10 @@ def main():
 
         if vertical == vertical_right:
             vertical_bullet_x -= vertical_bullet_game_speed
+            vertical_bullet_x1 -= vertical_bullet_game_speed
         else:
             vertical_bullet_x += vertical_bullet_game_speed
+            vertical_bullet_x1 += vertical_bullet_game_speed
 
         # Speed of few first bullets of each category
         bullet_y += bullet_game_speed
@@ -641,11 +644,14 @@ def main():
             get_hit.set_volume(0.2)
             get_hit.play()
             player_life = player_life - 1
+            if start_x <= 349:
+                vertical_bullet_x = 700
+            if start_x >= 350:
+                vertical_bullet_x = 0
             vertical_bullet_y = random.randint(630, 690)
-            vertical_bullet_x = random.choice([0, 700])
-            screen.blit(vertical, (vertical_bullet_x, vertical_bullet_y))
+            screen.blit(vertical, (vertical_bullet_x1, vertical_bullet_y))
 
-        if vertical == vertical_right:
+        elif vertical == vertical_right:
             if vertical_bullet_x <= 0:
                 score += 20
                 vertical_bullet_y = random.randint(630, 690)
@@ -656,11 +662,15 @@ def main():
                     vertical = vertical_right
                 screen.blit(vertical, (vertical_bullet_x, vertical_bullet_y))
 
-        if vertical == vertical_left:
+        elif vertical == vertical_left:
             if vertical_bullet_x >= window_x:
                 score += 20
                 vertical_bullet_y = random.randint(630, 690)
                 vertical_bullet_x = random.choice([0, 700])
+                if vertical_bullet_x == 0:
+                    vertical = vertical_left
+                elif vertical_bullet_x == 700:
+                    vertical = vertical_right
                 screen.blit(vertical, (vertical_bullet_x, vertical_bullet_y))
 
         main_clock.tick(60)
